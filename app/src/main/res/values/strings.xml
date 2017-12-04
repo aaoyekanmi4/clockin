@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Clock In App </string>
+    <string name="start_time">Clock In</string>
+    <string name="end_time">Clock Out</string>
+</resources>
