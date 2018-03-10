@@ -17,6 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".TotalHours"></activity>
+        <provider
+            android:name=".data.ClockProvider"
+            android:authorities="com.example.android.myapplication"
+            android:exported="false" />
     </application>
 
 </manifest>

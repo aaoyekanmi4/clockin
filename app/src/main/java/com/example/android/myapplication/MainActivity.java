@@ -5,13 +5,14 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import static java.lang.Math.toIntExact;
 
 import com.example.android.myapplication.data.ClockContract;
 import com.example.android.myapplication.data.ClockDbHelper;
@@ -20,6 +21,9 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static android.R.attr.name;
+import static java.lang.Math.toIntExact;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -137,19 +141,118 @@ insertTime();
 //        // Gets the database in write mode
         SQLiteDatabase database = helper.getWritableDatabase();
 
-        // Create a ContentValues object where column names are the keys,
-        // and pet attributes from the editor are the values.
-        ContentValues values = new ContentValues();
-        values.put(ClockContract.ClockEntry.COLUMN_DATE, databaseDate);
-        values.put(ClockContract.ClockEntry.COLUMN_TIME_IN, inTimeDisplayed);
-        values.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, outTimeDisplayed);
-        values.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, databaseMinutes);
+
+        //Manual Entries for last pay period
+        ContentValues manValues = new ContentValues();
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "1/31");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "2:00AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "9:45AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 465);
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/1");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "4:00AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "7;00AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 180);
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/2");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "1:15AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "9:15AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 480);
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/3");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "2:30AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "10:00AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 450);
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/5");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "3:30AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "7:30AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 240);
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/7");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "2:00AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "8:30AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 390);
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/9");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "1:30AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "9:15AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 465);
 
         //insert values into the database
-        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, values);
-        Log.v("MainActivity", "inserted content");
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/10");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "2:45AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "9:30AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 405);
+
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/11");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "2:35AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "10:45AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 495);
+
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+
+        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "2/12");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "3:00AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "8:00AM");
+        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 300);
+
+        //insert values into the database
+        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+//
+//        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "1/27");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "2:30AM");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "8:40AM");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 370);
+//
+//        //insert values into the database
+//        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+//
+//
+//        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "1/28");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "5:30AM");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "11:30AM");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 360);
+//
+//        //insert values into the database
+//        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+//
+//        manValues.put(ClockContract.ClockEntry.COLUMN_DATE, "1/29");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_IN, "3:00AM");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, "8:30AM");
+//        manValues.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, 330);
+//
+//        //insert values into the database
+//        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, manValues);
+
+
+
+        // Create a ContentValues object where column names are the keys,
+        // and pet attributes from the editor are the values.
+//        ContentValues values = new ContentValues();
+//        values.put(ClockContract.ClockEntry.COLUMN_DATE, databaseDate);
+//        values.put(ClockContract.ClockEntry.COLUMN_TIME_IN, inTimeDisplayed);
+//        values.put(ClockContract.ClockEntry.COLUMN_TIME_OUT, outTimeDisplayed);
+//        values.put(ClockContract.ClockEntry.COLUMN_TIME_FOR_DAY, databaseMinutes);
+//
+//        //insert values into the database
+//        database.insert(ClockContract.ClockEntry.TABLE_NAME, null, values);
+//        Log.v("MainActivity", "inserted content");
 
     }
+
+
+
 
 
 }

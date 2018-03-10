@@ -1,10 +1,13 @@
 package com.example.android.myapplication;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.myapplication.data.ClockContract.ClockEntry;
@@ -28,6 +31,7 @@ public class TotalHours extends AppCompatActivity {
 
 
  private void displayDatabaseInfo () {
+     int totalMinutes = 0;
      //Create a helper object using the ClockDbHelper class
     ClockDbHelper helper = new ClockDbHelper(this);
     //Create a database object using the helper class object
@@ -68,6 +72,7 @@ try {
         String currentTimeIn = cursor.getString(timeInColumnIndex);
         String currentTimeOut = cursor.getString(timeOutColumnIndex);
         int minutes = cursor.getInt(daysHoursColumnIndex);
+        totalMinutes += minutes;
         Log.v("TotalHours", "I ran");
         String currentHours = printHours(minutes);
 
@@ -80,8 +85,12 @@ try {
                 currentHours));
     }
 } finally {
+    TextView totalView = (TextView) findViewById(R.id.total_hours);
+    totalView.append(printHours(totalMinutes));
+
     // Always close the cursor when you're done reading from it. This releases all its
     // resources and makes it invalid.
+
     cursor.close();
 }
 
@@ -95,6 +104,24 @@ try {
         Log.v("TotalHours",stringTimeFormatted);
         return stringTimeFormatted;
 
+    }
+    public void submitHours(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Hours for pay period");
+        TextView displayView = (TextView) findViewById(R.id.logged_hours);
+        TextView totalView = (TextView) findViewById(R.id.total_hours);
+        String totalMessage = totalView.getText().toString();
+        displayView.append("\n" +                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     totalMessage);
+        String summaryMessage = displayView.getText().toString();
+
+
+        intent.putExtra(Intent.EXTRA_TEXT, summaryMessage);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
 }
